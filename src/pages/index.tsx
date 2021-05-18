@@ -1,7 +1,23 @@
-import { Header } from "../components/Header";
+export default function Home(props) {
 
-export default function Home() {
+  console.log(props.episodes)
   return (
-    <Header/>
+   <h1>Index</h1>
   )
+}
+
+// SSR - getServerSideProps()
+// SSG - getStaticProps()
+
+export async function getStaticProps() {
+  const response = await fetch('http://localhost:3333/episodes')
+  const data = await response.json();
+
+  return {
+    props:  {
+      episodes: data
+    }, 
+    revalidate: 60 * 60 * 8,
+  }
+
 }
