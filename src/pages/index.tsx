@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import { api } from '../services/api';
-
+import styles from './home.module.scss';
+import Image from 'next/image';
 import format from 'date-fns/format';
 import ptBR from 'date-fns/locale/pt-BR';
 import { parseISO } from 'date-fns';
@@ -11,22 +12,51 @@ type Episode = {
   title: string;
   members: string;
   description: string;
+  thumbnail: string;
   duration: number;
   durationAsString: string;
   publishedAt: string;
   url: string;
-
-
 }
 
 type HomeProps = {
-  episodes: Episode[];
+  latestEpisodes: Episode[];
+  allEpisodes: Episode[];
 }
 
-export default function Home(props : HomeProps) {
+export default function Home({ latestEpisodes, allEpisodes} : HomeProps) {
 
   return (
-   <p>{JSON.stringify(props.episodes)}</p>
+   <div className={styles.homepage}>
+     <section className={styles.latestEpisodes}>
+       <h2>Últimos lançamentos</h2>
+       
+       <ul>
+         {latestEpisodes.map(ep => {
+          return (
+            <li key={ep.id}>
+              <Image width={192} height={192} src={ep.thumbnail} alt={ep.title} objectFit="cover"/>
+              
+              <div className={styles.episodeDetails}>
+                <a href="">{ep.title}</a>
+                <p>{ep.members}</p>
+                <span>{ep.publishedAt}</span>
+                <span>{ep.durationAsString}</span>
+              </div>
+
+              <button type="button">
+                <img src="/play-green.svg" alt="Tocar Episódio" />
+              </button>
+            </li>
+          ) 
+          })}
+       </ul>
+     </section>
+
+     <section className={styles.allEpisodes}>
+
+     </section>
+   </div>
   )
 }
 
@@ -45,7 +75,7 @@ export const getStaticProps : GetStaticProps = async () => {
   const episodes = data.map(episode => {
     return {
       id: episode.id,
-      tile: episode.title,
+      title: episode.title,
       description: episode.description,
       thumbnail: episode.thumbnail,
       members: episode.members,
@@ -56,9 +86,13 @@ export const getStaticProps : GetStaticProps = async () => {
     }
   })
 
+  const latestEpisodes = episodes.slice(0, 2);
+  const allEpisodes = episodes.slice(2, episodes.length);
+
   return {
     props:  {
-      episodes: episodes
+      latestEpisodes,
+      allEpisodes
     }, 
     revalidate: 60 * 60 * 8,
   }
