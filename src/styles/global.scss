@@ -1,62 +1,144 @@
-:root {
-    --white: #FFF;
-  
-    --gray-50: #F7F8FA;
-    --gray-100: #E6E8EB;
-    --gray-200: #AFB2B1;
-    --gray-500: #808080;
-    --gray-800: #494D4B;
-  
-    --green-500: #04D361;
-    
-    --purple-300: #9F75FF;
-    --purple-400: #9164FA; 
-    --purple-500: #8257E5;
-    --purple-800: #6F48C9;
-}
-
-@media(max-width: 1080px) {
-    html {
-        font-size: 93.75%;
-    }
-}
-
-@media(max-width: 720px) {
-    html {
-        font-size: 87.5%;
-    }
-}
-
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--white: #fff;
+
+	--gray-50: #f7f8fa;
+	--gray-100: #e6e8eb;
+	--gray-200: #afb2b1;
+	--gray-500: #808080;
+	--gray-800: #494d4b;
+
+	--green-500: #04d361;
+
+	--purple-300: #9f75ff;
+	--purple-400: #9164fa;
+	--purple-500: #8257e5;
+	--purple-800: #6f48c9;
+
+	//darkMode:
+	--dark-background: #121214;
+	--dark-background-lighter: #212025;
+}
+
+html {
+	font-size: 81.25%; // 13px
+}
+
+//Práticas de acessibilidade:
+//Aplicar media queries para as primeiras variações de tamanhos de tela. Obs: utilizar sempre REM (relativa)
+@media (max-width: 1366px) {
+	html {
+		font-size: 80%;
+	}
+}
+
+@media (max-width: 720px) {
+	html {
+		font-size: 87.5%; // 14px
+	}
 }
 
 body {
-    background: var(--gray-50);
+	background: var(--gray-50);
+	overflow: hidden;
+	transition: all 0.1s ease-in-out;
 }
 
-body, input, textarea, button {
-    font: 500 1rem Inter, sans-serif;
-    color: var(--gray-500);
+body,
+input,
+textarea,
+button {
+	font: 500 1rem Inter, sans-serif;
+	color: var(--gray-500);
+	outline: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 600;
-    font-family: Lexend, sans-serif;
-    colo: var(--gray-800);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 600;
+	font-family: Lexend, sans-serif;
+	color: var(--gray-800);
 }
 
 h1 {
-    font-size: 2rem;
+	font-size: 2rem;
 }
 
 h2 {
-    font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 button {
-    cursor: pointer;
+	cursor: pointer;
+}
+
+li {
+	span {
+		font-size: 1.5rem;
+	}
+}
+
+.darkMode {
+	background: var(--dark-background);
+	color: var(--gray-50);
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: var(--gray-100);
+	}
+
+	p {
+		color: var(--gray-50);
+	}
+
+	table td a {
+		color: var(--gray-50);
+	}
+
+	main {
+		header#appHeader {
+			background: var(--dark-background-lighter);
+			border-bottom: 1px solid var(--dark-background-lighter);
+		}
+
+		header#info {
+			border-bottom: 1px solid var(--dark-background-lighter);
+		}
+	}
+
+	.home_homePage__3mJ6H .home_latestEpisodes__sprHN ul li {
+		background: var(--dark-background-lighter);
+		border: 0;
+	}
+
+	.latestEpisodes {
+		background: var(--dark-background-lighter);
+	}
+
+	.home_homePage__3mJ6H .home_allEpisodes__EffYV ul.home_listAll__2zBvg li {
+		background: var(--dark-background-lighter);
+		border: 0;
+	}
+
+	.allEpisodes {
+		background: var(--dark-background);
+	}
+}
+
+.scrollableContent {
+	height: calc(100vh - 6.5rem);
+	overflow-y: auto;
 }
