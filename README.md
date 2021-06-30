@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <img src="https://raw.githubusercontent.com/renamcomn/podcastr/3113b18bdd8ee9d7b2a1a873c5597ac382efaaee/public/podcastr-logo-light.svg" width="400"/>
+</div>
+  <p align="center">O melhor para você ouvir, sempre</p>
+
 
 ## Getting Started
 
